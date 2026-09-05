@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/UI';
@@ -32,10 +32,8 @@ export default function LoginScreen({ navigation }) {
     >
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.brandRow}>
-          <View style={styles.logoCircle}>
-            <Text style={styles.logoText}>ک</Text>
-          </View>
-          <Text style={styles.brandName}>مسیر کانکور</Text>
+          <Image source={require('../../assets/logo-icon.png')} style={styles.logoImage} resizeMode="contain" />
+          <Text style={styles.brandName}>اکادمی تخصصی قرلق</Text>
         </View>
 
         <Text style={styles.title}>ورود به حساب</Text>
@@ -84,16 +82,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1, backgroundColor: colors.paper },
   container: { flexGrow: 1, justifyContent: 'center', padding: 24 },
   brandRow: { alignItems: 'center', marginBottom: 20 },
-  logoCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: colors.gold,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  logoText: { fontSize: 24, fontWeight: '900', color: colors.navy },
+  logoImage: { width: 88, height: 60, marginBottom: 10 },
   brandName: { fontSize: 17, fontWeight: '800', color: colors.heading },
   title: { fontSize: 24, fontWeight: '900', color: colors.heading, textAlign: 'center', marginBottom: 24 },
   card: {

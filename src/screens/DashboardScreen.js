@@ -121,6 +121,10 @@ export default function DashboardScreen({ navigation }) {
         ))}
         {data.testResults.length === 0 && <Text style={styles.emptyText}>هنوز آزمونی نداده‌اید.</Text>}
       </View>
+
+      <Pressable onPress={() => navigation.navigate('PaymentHistory')} style={styles.paymentHistoryLink}>
+        <Text style={styles.paymentHistoryLinkText}>🧾 تاریخچه پرداخت‌ها</Text>
+      </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -192,4 +196,14 @@ const styles = StyleSheet.create({
   resultCourse: { fontSize: 11, color: colors.ink, opacity: 0.55, marginTop: 2 },
   resultScore: { fontSize: 15, fontWeight: '800', color: colors.heading },
   emptyText: { fontSize: 13, color: colors.ink, opacity: 0.55 },
+  paymentHistoryLink: {
+    marginTop: 26,
+    backgroundColor: colors.surface,
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.line + '14',
+  },
+  paymentHistoryLinkText: { fontSize: 13, fontWeight: '700', color: colors.heading },
 });

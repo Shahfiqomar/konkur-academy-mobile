@@ -74,4 +74,6 @@ export const api = {
 
   getMyCourses: (token) => request('/courses/mine', { token }),
   getCourseStudents: (courseId, token) => request(`/courses/${courseId}/students`, { token }),
+
+  getPaymentHistory: (token) => request('/payments/history', { token }),
 };

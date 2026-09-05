@@ -65,4 +65,7 @@ export const api = {
   createTest: (payload, token) => request('/tests', { method: 'POST', body: payload, token }),
 
   getAdminStats: (token) => request('/admin-stats', { token }),
+
+  getLiveSessions: (courseId, token) => request(`/live/course/${courseId}`, { token }),
+  createLiveSession: (payload, token) => request('/live', { method: 'POST', body: payload, token }),
 };

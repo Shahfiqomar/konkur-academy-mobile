@@ -157,12 +157,20 @@ export default function CourseDetailScreen({ route, navigation }) {
       </View>
 
       {canAccess && (
-        <Button
-          title="💬 پرسش و پاسخ کورس"
-          onPress={() => navigation.navigate('ForumList', { courseId })}
-          variant="secondary"
-          style={styles.forumButton}
-        />
+        <View style={styles.linkActions}>
+          <Button
+            title="💬 پرسش و پاسخ کورس"
+            onPress={() => navigation.navigate('ForumList', { courseId })}
+            variant="secondary"
+            style={styles.linkButton}
+          />
+          <Button
+            title="🎥 کلاس‌های آنلاین زنده"
+            onPress={() => navigation.navigate('LiveClass', { courseId })}
+            variant="secondary"
+            style={styles.linkButton}
+          />
+        </View>
       )}
 
       {!canAccess && (
@@ -231,6 +239,7 @@ const styles = StyleSheet.create({
   rowMeta: { fontSize: 12, color: colors.ink, opacity: 0.6 },
   rowLink: { fontSize: 12, fontWeight: '700', color: colors.sage },
   emptyText: { fontSize: 13, color: colors.ink, opacity: 0.55 },
-  forumButton: { marginTop: 28 },
+  linkActions: { gap: 10, marginTop: 28 },
+  linkButton: {},
   footNote: { fontSize: 12, color: colors.ink, opacity: 0.55, textAlign: 'center', marginTop: 24 },
 });

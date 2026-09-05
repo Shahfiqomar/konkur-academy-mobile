@@ -31,6 +31,13 @@ export default function LoginScreen({ navigation }) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        <View style={styles.brandRow}>
+          <View style={styles.logoCircle}>
+            <Text style={styles.logoText}>ک</Text>
+          </View>
+          <Text style={styles.brandName}>مسیر کانکور</Text>
+        </View>
+
         <Text style={styles.title}>ورود به حساب</Text>
         <View style={styles.card}>
           {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -76,8 +83,30 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   flex: { flex: 1, backgroundColor: colors.paper },
   container: { flexGrow: 1, justifyContent: 'center', padding: 24 },
+  brandRow: { alignItems: 'center', marginBottom: 20 },
+  logoCircle: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  logoText: { fontSize: 24, fontWeight: '900', color: colors.navy },
+  brandName: { fontSize: 17, fontWeight: '800', color: colors.heading },
   title: { fontSize: 24, fontWeight: '900', color: colors.heading, textAlign: 'center', marginBottom: 24 },
-  card: { backgroundColor: colors.surface, borderRadius: 16, padding: 20, gap: 4 },
+  card: {
+    backgroundColor: colors.surface,
+    borderRadius: 16,
+    padding: 20,
+    gap: 4,
+    shadowColor: colors.navy,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 3,
+  },
   label: { fontSize: 13, fontWeight: '700', color: colors.heading, marginBottom: 6, marginTop: 12 },
   input: {
     borderWidth: 1,

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { ErrorView, LoadingView } from '../components/UI';
@@ -38,10 +39,11 @@ export default function DashboardScreen({ navigation }) {
   if (!data) return <LoadingView />;
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-    >
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>سلام {user?.full_name} 👋</Text>
@@ -104,11 +106,13 @@ export default function DashboardScreen({ navigation }) {
         ))}
         {data.testResults.length === 0 && <Text style={styles.emptyText}>هنوز آزمونی نداده‌اید.</Text>}
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: colors.paper },
   container: { padding: 20, backgroundColor: colors.paper, flexGrow: 1 },
   header: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' },
   greeting: { fontSize: 20, fontWeight: '900', color: colors.heading },

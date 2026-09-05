@@ -15,6 +15,7 @@ import CourseDetailScreen from '../screens/CourseDetailScreen';
 import VideoPlayerScreen from '../screens/VideoPlayerScreen';
 import TestScreen from '../screens/TestScreen';
 import PaymentStatusScreen from '../screens/PaymentStatusScreen';
+import LeaderboardScreen from '../screens/LeaderboardScreen';
 
 const AuthStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
@@ -42,9 +43,10 @@ function MainTabs() {
         ...screenOptions,
         tabBarActiveTintColor: colors.gold,
         tabBarInactiveTintColor: colors.ink,
-        tabBarIcon: ({ color, size }) => (
-          <Text style={{ color, fontSize: size - 4 }}>{route.name === 'Home' ? '📚' : '🧭'}</Text>
-        ),
+        tabBarIcon: ({ color, size }) => {
+          const icon = { Home: '📚', Dashboard: '🧭', Leaderboard: '🏆' }[route.name] || '•';
+          return <Text style={{ color, fontSize: size - 4 }}>{icon}</Text>;
+        },
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'کورس‌ها', tabBarLabel: 'کورس‌ها' }} />
@@ -52,6 +54,11 @@ function MainTabs() {
         name="Dashboard"
         component={DashboardScreen}
         options={{ headerShown: false, tabBarLabel: 'داشبورد' }}
+      />
+      <Tab.Screen
+        name="Leaderboard"
+        component={LeaderboardScreen}
+        options={{ title: 'لیدربورد', tabBarLabel: 'لیدربورد' }}
       />
     </Tab.Navigator>
   );

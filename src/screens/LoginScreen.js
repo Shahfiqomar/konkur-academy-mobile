@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     fontSize: 15,
     color: colors.ink,
+    textAlign: 'right',
   },
   submitButton: { marginTop: 20 },
   error: {

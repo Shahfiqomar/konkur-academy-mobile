@@ -68,4 +68,7 @@ export const api = {
 
   getLiveSessions: (courseId, token) => request(`/live/course/${courseId}`, { token }),
   createLiveSession: (payload, token) => request('/live', { method: 'POST', body: payload, token }),
+
+  getNotifications: (token) => request('/notifications', { token }),
+  markNotificationsRead: (token) => request('/notifications/read-all', { method: 'POST', token }),
 };

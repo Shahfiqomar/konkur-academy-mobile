@@ -12,8 +12,13 @@ export default function DashboardScreen({ navigation }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [refreshing, setRefreshing] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const load = useCallback(() => {
+    api
+      .getNotifications(token)
+      .then((n) => setUnreadCount(n.unreadCount))
+      .catch(() => {});
     return api
       .getDashboard(token)
       .then((d) => {
@@ -49,9 +54,19 @@ export default function DashboardScreen({ navigation }) {
           <Text style={styles.greeting}>سلام {user?.full_name} 👋</Text>
           <Text style={styles.subGreeting}>این مسیر شما تا روز کانکور است.</Text>
         </View>
-        <Pressable onPress={logout}>
-          <Text style={styles.logout}>خروج</Text>
-        </Pressable>
+        <View style={styles.headerActions}>
+          <Pressable onPress={() => navigation.navigate('Notifications')} style={styles.notifButton}>
+            <Text style={styles.notifIcon}>🔔</Text>
+            {unreadCount > 0 && (
+              <View style={styles.notifBadge}>
+                <Text style={styles.notifBadgeText}>{unreadCount > 9 ? '9+' : unreadCount}</Text>
+              </View>
+            )}
+          </Pressable>
+          <Pressable onPress={logout}>
+            <Text style={styles.logout}>خروج</Text>
+          </Pressable>
+        </View>
       </View>
 
       <View style={styles.progressCard}>
@@ -118,6 +133,22 @@ const styles = StyleSheet.create({
   greeting: { fontSize: 20, fontWeight: '900', color: colors.heading },
   subGreeting: { fontSize: 13, color: colors.ink, opacity: 0.65, marginTop: 4 },
   logout: { fontSize: 13, fontWeight: '700', color: colors.danger },
+  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  notifButton: { position: 'relative' },
+  notifIcon: { fontSize: 18 },
+  notifBadge: {
+    position: 'absolute',
+    top: -4,
+    left: -6,
+    minWidth: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: colors.danger,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 3,
+  },
+  notifBadgeText: { color: '#fff', fontSize: 9, fontWeight: '800' },
   progressCard: {
     marginTop: 20,
     backgroundColor: colors.surface,

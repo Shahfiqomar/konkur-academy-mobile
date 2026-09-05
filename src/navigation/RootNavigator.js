@@ -19,6 +19,7 @@ import LeaderboardScreen from '../screens/LeaderboardScreen';
 import ForumListScreen from '../screens/ForumListScreen';
 import ForumThreadScreen from '../screens/ForumThreadScreen';
 import LiveClassScreen from '../screens/LiveClassScreen';
+import NotificationsScreen from '../screens/NotificationsScreen';
 import AdminPanelScreen from '../screens/AdminPanelScreen';
 import AdminStatsScreen from '../screens/AdminStatsScreen';
 
@@ -92,6 +93,7 @@ function AppNavigator() {
       <RootStack.Screen name="ForumList" component={ForumListScreen} options={{ title: 'پرسش و پاسخ' }} />
       <RootStack.Screen name="ForumThread" component={ForumThreadScreen} options={{ title: 'موضوع انجمن' }} />
       <RootStack.Screen name="LiveClass" component={LiveClassScreen} options={{ title: 'کلاس آنلاین زنده' }} />
+      <RootStack.Screen name="Notifications" component={NotificationsScreen} options={{ title: 'اعلان‌ها' }} />
     </RootStack.Navigator>
   );
 }

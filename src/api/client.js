@@ -63,4 +63,6 @@ export const api = {
   createBranch: (payload, token) => request('/branches', { method: 'POST', body: payload, token }),
   createCourse: (payload, token) => request('/courses', { method: 'POST', body: payload, token }),
   createTest: (payload, token) => request('/tests', { method: 'POST', body: payload, token }),
+
+  getAdminStats: (token) => request('/admin-stats', { token }),
 };

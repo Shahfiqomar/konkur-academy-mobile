@@ -19,6 +19,7 @@ import LeaderboardScreen from '../screens/LeaderboardScreen';
 import ForumListScreen from '../screens/ForumListScreen';
 import ForumThreadScreen from '../screens/ForumThreadScreen';
 import AdminPanelScreen from '../screens/AdminPanelScreen';
+import AdminStatsScreen from '../screens/AdminStatsScreen';
 
 const AuthStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
@@ -97,6 +98,7 @@ function AdminNavigator() {
   return (
     <RootStack.Navigator screenOptions={screenOptions}>
       <RootStack.Screen name="AdminPanel" component={AdminPanelScreen} options={{ title: 'پنل مدیریت' }} />
+      <RootStack.Screen name="AdminStats" component={AdminStatsScreen} options={{ title: 'آمار و گزارش‌گیری' }} />
     </RootStack.Navigator>
   );
 }

@@ -18,7 +18,7 @@ import { colors } from '../theme';
 
 const emptyQuestion = () => ({ question_text: '', options: ['', '', '', ''], correct_index: 0 });
 
-export default function AdminPanelScreen() {
+export default function AdminPanelScreen({ navigation }) {
   const { token, logout } = useAuth();
   const [courses, setCourses] = useState([]);
   const [branches, setBranches] = useState([]);
@@ -181,6 +181,10 @@ export default function AdminPanelScreen() {
             <Text style={styles.logout}>خروج</Text>
           </Pressable>
         </View>
+
+        <Pressable onPress={() => navigation.navigate('AdminStats')} style={styles.statsLink}>
+          <Text style={styles.statsLinkText}>📊 آمار و گزارش‌گیری</Text>
+        </Pressable>
 
         {msg ? <Text style={styles.successMsg}>{msg}</Text> : null}
         {paymentMsg ? <Text style={styles.paymentMsg}>{paymentMsg}</Text> : null}
@@ -394,6 +398,15 @@ const styles = StyleSheet.create({
   headerRow: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 4 },
   title: { fontSize: 20, fontWeight: '900', color: colors.heading, flexShrink: 1 },
   logout: { fontSize: 13, fontWeight: '700', color: colors.danger, marginTop: 4 },
+  statsLink: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.navy,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    marginTop: 10,
+  },
+  statsLinkText: { color: '#fff', fontWeight: '700', fontSize: 13 },
   successMsg: { color: colors.sage, fontWeight: '700', fontSize: 13, marginTop: 8 },
   paymentMsg: { color: colors.danger, fontWeight: '700', fontSize: 13, marginTop: 8 },
   card: {

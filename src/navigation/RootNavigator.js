@@ -22,6 +22,7 @@ import LiveClassScreen from '../screens/LiveClassScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import AdminPanelScreen from '../screens/AdminPanelScreen';
 import AdminStatsScreen from '../screens/AdminStatsScreen';
+import TeacherPanelScreen from '../screens/TeacherPanelScreen';
 
 const AuthStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
@@ -107,6 +108,17 @@ function AdminNavigator() {
   );
 }
 
+function TeacherNavigator() {
+  return (
+    <RootStack.Navigator screenOptions={screenOptions}>
+      <RootStack.Screen name="TeacherPanel" component={TeacherPanelScreen} options={{ title: 'پنل استاد' }} />
+      <RootStack.Screen name="ForumList" component={ForumListScreen} options={{ title: 'پرسش و پاسخ' }} />
+      <RootStack.Screen name="ForumThread" component={ForumThreadScreen} options={{ title: 'موضوع انجمن' }} />
+      <RootStack.Screen name="LiveClass" component={LiveClassScreen} options={{ title: 'کلاس آنلاین زنده' }} />
+    </RootStack.Navigator>
+  );
+}
+
 export default function RootNavigator() {
   const { token, user, loading } = useAuth();
 
@@ -114,5 +126,9 @@ export default function RootNavigator() {
 
   if (!token) return <NavigationContainer><AuthNavigator /></NavigationContainer>;
 
-  return <NavigationContainer>{user?.role === 'admin' ? <AdminNavigator /> : <AppNavigator />}</NavigationContainer>;
+  let Navigator = AppNavigator;
+  if (user?.role === 'admin') Navigator = AdminNavigator;
+  else if (user?.role === 'teacher') Navigator = TeacherNavigator;
+
+  return <NavigationContainer><Navigator /></NavigationContainer>;
 }

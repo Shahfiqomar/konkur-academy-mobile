@@ -71,4 +71,7 @@ export const api = {
 
   getNotifications: (token) => request('/notifications', { token }),
   markNotificationsRead: (token) => request('/notifications/read-all', { method: 'POST', token }),
+
+  getMyCourses: (token) => request('/courses/mine', { token }),
+  getCourseStudents: (courseId, token) => request(`/courses/${courseId}/students`, { token }),
 };

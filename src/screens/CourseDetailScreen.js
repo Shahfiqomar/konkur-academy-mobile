@@ -79,6 +79,15 @@ export default function CourseDetailScreen({ route, navigation }) {
         </View>
       </View>
 
+      {isPending && enrollment?.paymentId ? (
+        <Button
+          title="مشاهده وضعیت پرداخت"
+          onPress={() => navigation.navigate('PaymentStatus', { paymentId: enrollment.paymentId })}
+          variant="secondary"
+          style={styles.paymentStatusButton}
+        />
+      ) : null}
+
       {!canAccess && course.price === 0 && (
         <Button
           title={busy ? 'در حال پردازش...' : 'ثبت‌نام رایگان'}
@@ -174,6 +183,7 @@ const styles = StyleSheet.create({
   pendingText: { color: '#B45309', fontWeight: '700', fontSize: 13, marginTop: 6 },
   failedText: { color: colors.danger, fontWeight: '700', fontSize: 13, marginTop: 6 },
   goldButton: { backgroundColor: colors.gold, marginTop: 14 },
+  paymentStatusButton: { marginTop: 10 },
   enrollActions: { gap: 10, marginTop: 14 },
   notice: {
     marginTop: 12,

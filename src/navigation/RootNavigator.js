@@ -14,6 +14,7 @@ import DashboardScreen from '../screens/DashboardScreen';
 import CourseDetailScreen from '../screens/CourseDetailScreen';
 import VideoPlayerScreen from '../screens/VideoPlayerScreen';
 import TestScreen from '../screens/TestScreen';
+import PaymentStatusScreen from '../screens/PaymentStatusScreen';
 
 const AuthStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
@@ -70,6 +71,11 @@ function AppNavigator() {
         name="Test"
         component={TestScreen}
         options={({ route }) => ({ title: route.params?.title || 'آزمون' })}
+      />
+      <RootStack.Screen
+        name="PaymentStatus"
+        component={PaymentStatusScreen}
+        options={{ title: 'وضعیت پرداخت' }}
       />
     </RootStack.Navigator>
   );

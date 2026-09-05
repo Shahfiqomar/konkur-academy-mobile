@@ -156,6 +156,15 @@ export default function CourseDetailScreen({ route, navigation }) {
         {course.tests.length === 0 && <Text style={styles.emptyText}>هنوز آزمونی اضافه نشده.</Text>}
       </View>
 
+      {canAccess && (
+        <Button
+          title="💬 پرسش و پاسخ کورس"
+          onPress={() => navigation.navigate('ForumList', { courseId })}
+          variant="secondary"
+          style={styles.forumButton}
+        />
+      )}
+
       {!canAccess && (
         <Text style={styles.footNote}>برای دسترسی به ویدیوها و آزمون‌ها ابتدا باید ثبت‌نام کنید.</Text>
       )}
@@ -222,5 +231,6 @@ const styles = StyleSheet.create({
   rowMeta: { fontSize: 12, color: colors.ink, opacity: 0.6 },
   rowLink: { fontSize: 12, fontWeight: '700', color: colors.sage },
   emptyText: { fontSize: 13, color: colors.ink, opacity: 0.55 },
+  forumButton: { marginTop: 28 },
   footNote: { fontSize: 12, color: colors.ink, opacity: 0.55, textAlign: 'center', marginTop: 24 },
 });

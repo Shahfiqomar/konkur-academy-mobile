@@ -45,4 +45,22 @@ export const api = {
   getDashboard: (token) => request('/dashboard', { token }),
   getLeaderboard: (branchId, token) =>
     request(branchId ? `/leaderboard?branch_id=${branchId}` : '/leaderboard', { token }),
+
+  getThreads: (courseId, token) => request(`/forum/course/${courseId}`, { token }),
+  createThread: (courseId, payload, token) =>
+    request(`/forum/course/${courseId}`, { method: 'POST', body: payload, token }),
+  getThread: (id, token) => request(`/forum/thread/${id}`, { token }),
+  replyThread: (id, payload, token) =>
+    request(`/forum/thread/${id}/reply`, { method: 'POST', body: payload, token }),
+
+  getPendingPayments: (token) => request('/payments/pending', { token }),
+  approvePayment: (paymentId, token) => request(`/payments/${paymentId}/approve`, { method: 'POST', token }),
+  rejectPayment: (paymentId, token) => request(`/payments/${paymentId}/reject`, { method: 'POST', token }),
+
+  getTeachers: (token) => request('/teachers', { token }),
+  createTeacher: (payload, token) => request('/teachers', { method: 'POST', body: payload, token }),
+
+  createBranch: (payload, token) => request('/branches', { method: 'POST', body: payload, token }),
+  createCourse: (payload, token) => request('/courses', { method: 'POST', body: payload, token }),
+  createTest: (payload, token) => request('/tests', { method: 'POST', body: payload, token }),
 };

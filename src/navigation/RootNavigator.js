@@ -16,6 +16,9 @@ import VideoPlayerScreen from '../screens/VideoPlayerScreen';
 import TestScreen from '../screens/TestScreen';
 import PaymentStatusScreen from '../screens/PaymentStatusScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
+import ForumListScreen from '../screens/ForumListScreen';
+import ForumThreadScreen from '../screens/ForumThreadScreen';
+import AdminPanelScreen from '../screens/AdminPanelScreen';
 
 const AuthStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
@@ -84,14 +87,26 @@ function AppNavigator() {
         component={PaymentStatusScreen}
         options={{ title: 'وضعیت پرداخت' }}
       />
+      <RootStack.Screen name="ForumList" component={ForumListScreen} options={{ title: 'پرسش و پاسخ' }} />
+      <RootStack.Screen name="ForumThread" component={ForumThreadScreen} options={{ title: 'موضوع انجمن' }} />
+    </RootStack.Navigator>
+  );
+}
+
+function AdminNavigator() {
+  return (
+    <RootStack.Navigator screenOptions={screenOptions}>
+      <RootStack.Screen name="AdminPanel" component={AdminPanelScreen} options={{ title: 'پنل مدیریت' }} />
     </RootStack.Navigator>
   );
 }
 
 export default function RootNavigator() {
-  const { token, loading } = useAuth();
+  const { token, user, loading } = useAuth();
 
   if (loading) return <LoadingView />;
 
-  return <NavigationContainer>{token ? <AppNavigator /> : <AuthNavigator />}</NavigationContainer>;
+  if (!token) return <NavigationContainer><AuthNavigator /></NavigationContainer>;
+
+  return <NavigationContainer>{user?.role === 'admin' ? <AdminNavigator /> : <AppNavigator />}</NavigationContainer>;
 }
